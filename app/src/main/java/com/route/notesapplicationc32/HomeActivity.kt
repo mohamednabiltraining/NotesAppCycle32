@@ -1,6 +1,8 @@
 package com.route.notesapplicationc32
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.route.notesapplicationc32.adapter.NoteAdapter
 import com.route.notesapplicationc32.database.Note
@@ -8,7 +10,7 @@ import com.route.notesapplicationc32.database.NotesDataBase
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
-
+    lateinit var noteAdapter: NoteAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -16,16 +18,15 @@ class HomeActivity : AppCompatActivity() {
 
         val db = NotesDataBase.getInstance(applicationContext)
 
-//        db?.notesDao()?.insertNote(Note(title="mahmoud moussa",desc="mahmoud moussa",date = "25/10"))
-//        db?.notesDao()?.insertNote(Note(title="android",desc="mahmoud moussa",date = "25/10"))
-//        db?.notesDao()?.insertNote(Note(title="ios",desc="mahmoud moussa",date = "25/10"))
-//        db?.notesDao()?.insertNote(Note(title="full stack",desc="mahmoud moussa",date = "25/10"))
 
         var note: List<Note>? = db?.notesDao()?.getAllNotes()
-
-        var noteAdapter = NoteAdapter()
-        noteAdapter.changeData(note)
+        noteAdapter = NoteAdapter(note)
         home_note_rv.adapter = noteAdapter
+
+        home_add_btn.setOnClickListener(View.OnClickListener {
+            var intent = Intent(this, AddnoteActivity::class.java)
+            startActivity(intent)
+        })
 
 
 
@@ -37,5 +38,12 @@ class HomeActivity : AppCompatActivity() {
         // Todo : plus point -> click on note will open update note activity
 
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val db = NotesDataBase.getInstance(applicationContext)
+        var note: List<Note>? = db?.notesDao()?.getAllNotes()
+        noteAdapter.changeData(note)
     }
 }

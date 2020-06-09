@@ -10,6 +10,8 @@ import com.route.notesapplicationc32.database.Note
 
 class NoteAdapter(var data: List<Note>?) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
+    var onItemClick: OnItemClickListner? =null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)
         return ViewHolder(v)
@@ -25,7 +27,7 @@ class NoteAdapter(var data: List<Note>?) : RecyclerView.Adapter<NoteAdapter.View
     }
 
     fun getNoteByPosition(position: Int): Note? {
-        return data?.get(position);
+        return data?.get(position)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -33,6 +35,12 @@ class NoteAdapter(var data: List<Note>?) : RecyclerView.Adapter<NoteAdapter.View
         var model = data?.get(position)
         holder.title.text = model?.title
         holder.date.text = model?.date
+        if (onItemClick!=null){
+            holder.itemView.setOnClickListener(View.OnClickListener {
+                    onItemClick?.onClick(model)
+
+            })
+        }
 
     }
 
@@ -40,5 +48,9 @@ class NoteAdapter(var data: List<Note>?) : RecyclerView.Adapter<NoteAdapter.View
         var title: TextView = itemView.findViewById(R.id.item_title_tv)
         var date: TextView = itemView.findViewById(R.id.item_date_tv)
 
+    }
+
+    interface OnItemClickListner{
+        fun onClick(note: Note?)
     }
 }

@@ -27,8 +27,18 @@ class HomeActivity : AppCompatActivity() {
 
         home_add_btn.setOnClickListener(View.OnClickListener {
             var intent = Intent(this, AddnoteActivity::class.java)
+            intent.putExtra(Constants.EXTRA_TRANSACTION_TYPE,"1")
             startActivity(intent)
         })
+
+        noteAdapter.onItemClick=object :NoteAdapter.OnItemClickListner{
+            override fun onClick(note: Note?) {
+                var intent=Intent(this@HomeActivity,AddnoteActivity::class.java)
+                intent.putExtra(Constants.EXTRA_TRANSACTION_TYPE,"2")
+                intent.putExtra(Constants.EXTR_NOTE_MODIFY,note)
+                startActivity(intent)
+            }
+        }
 
 
         ItemTouchHelper( object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -43,15 +53,6 @@ class HomeActivity : AppCompatActivity() {
                 noteAdapter.changeData(notes)
             }
         }).attachToRecyclerView(home_note_rv)
-
-
-
-        // Todo: 1- list all notes from db in home Activity
-        //Todo :2- create new activity called add note to insert new note to room db
-        // Todo: plus points -> swipe to delete note from list
-        // Todo : plus point -> click on note will open update note activity
-
-
     }
 
     override fun onStart() {

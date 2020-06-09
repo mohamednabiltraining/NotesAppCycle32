@@ -16,7 +16,7 @@ abstract class NotesDataBase : RoomDatabase() {
     abstract fun notesDao(): NotesDao
 
     companion object {
-        val DB_NAME = "Notes-DB";
+        val DB_NAME = "Notes-DB"
         private var notesDataBase: NotesDataBase? = null //single object
 
         fun getInstance(context: Context): NotesDataBase? {
@@ -29,9 +29,8 @@ abstract class NotesDataBase : RoomDatabase() {
                     .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build()
-
             }
-            return notesDataBase;
+            return notesDataBase
         }
 
     }

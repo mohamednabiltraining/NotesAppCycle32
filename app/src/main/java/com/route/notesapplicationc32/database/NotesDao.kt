@@ -24,6 +24,6 @@ interface NotesDao {
     fun deleteNoteById(id: Int)
 
     @Query("select * from note")
-    fun getAllNotes();
+    fun getAllNotes(): List<Note>;
 
 }

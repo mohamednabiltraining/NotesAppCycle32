@@ -3,6 +3,7 @@ package com.route.notesapplicationc32.database
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 
 /**
@@ -18,4 +19,4 @@ data class Note(
     var date: String? = null,
     @Ignore
     var metaData: String? = null
-)
+) : Serializable

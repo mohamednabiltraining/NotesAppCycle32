@@ -24,6 +24,10 @@ class NoteAdapter(var data: List<Note>?) : RecyclerView.Adapter<NoteAdapter.View
         notifyDataSetChanged()
     }
 
+    fun getNoteByPosition(position: Int): Note? {
+        return data?.get(position);
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         var model = data?.get(position)

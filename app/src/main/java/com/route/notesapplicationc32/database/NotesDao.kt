@@ -15,15 +15,15 @@ interface NotesDao {
     fun insertNote(note: Note)
 
     @Update
-    fun updateNote(note: Note)
+    fun updateNote(note: Note?)
 
     @Delete
-    fun deleteNote(note: Note)
+    fun deleteNote(note: Note?)
 
     @Query("delete from Note where id=:id")
     fun deleteNoteById(id: Int)
 
     @Query("select * from note")
-    fun getAllNotes();
+    fun getAllNotes(): List<Note>
 
 }

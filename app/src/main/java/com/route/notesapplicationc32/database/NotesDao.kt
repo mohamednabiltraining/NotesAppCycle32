@@ -23,7 +23,7 @@ interface NotesDao {
     @Query("delete from Note where id=:id")
     fun deleteNoteById(id: Int)
 
-    @Query("select * from note")
+    @Query("select * from note order by id desc")
     fun getAllNotes(): List<Note>
 
 }

@@ -1,16 +1,15 @@
 package com.route.notesapplicationc32
 
-import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.route.notesapplicationc32.Base.BaseActivity
 import com.route.notesapplicationc32.database.Note
 import com.route.notesapplicationc32.database.NotesDataBase
 import kotlinx.android.synthetic.main.activity_add_note.*
 import java.util.*
 
-class AddNoteActivity : AppCompatActivity() {
+class AddNoteActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,15 +33,13 @@ class AddNoteActivity : AppCompatActivity() {
             )
             NotesDataBase.getInstance(applicationContext)
                 ?.notesDao()?.insertNote(note)
-            val builder = AlertDialog.Builder(this)
-                .setMessage("Note added")
-                .setPositiveButton("ok", DialogInterface.OnClickListener { dialogInterface, i ->
+            showMessage(title = null, message = "Note added", posActionString = "ok"
+                , posAction = DialogInterface.OnClickListener { dialogInterface, i ->
                     dialogInterface.dismiss()
                     finish()
 
-                })
-                .setCancelable(false)
-            builder.show()
+                }, isCancelable = false
+            )
         }
     }
 
@@ -63,18 +60,17 @@ class AddNoteActivity : AppCompatActivity() {
         }
         if (hours == null || minutes == null) {
             isValid = false
-            val builder = AlertDialog.Builder(this)
-                .setTitle("error")
-                .setMessage("please select note time")
-                .setPositiveButton("ok", DialogInterface.OnClickListener { dialogInterface, i ->
+            showMessage("error", "please select note time",
+
+                "ok", DialogInterface.OnClickListener { dialogInterface, i ->
                     {
                         dialogInterface.dismiss()
                     }
-                })
-            builder.show()
+                });
         }
         return isValid
     }
+
 
     var hours: Int? = null
     var minutes: Int? = null

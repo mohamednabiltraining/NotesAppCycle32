@@ -2,13 +2,13 @@ package com.route.notesapplicationc32
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.route.notesapplicationc32.Base.BaseActivity
 import com.route.notesapplicationc32.adapter.NotesAdapter
 import com.route.notesapplicationc32.database.NotesDataBase
 import kotlinx.android.synthetic.main.activity_list_notes.*
 import kotlinx.android.synthetic.main.content_list_notes.*
 
-class ListNotesActivity : AppCompatActivity() {
+class ListNotesActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

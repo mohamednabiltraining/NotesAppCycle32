@@ -15,7 +15,8 @@ import com.route.notesapplicationc32.database.Note
  */
 class NotesAdapter : RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
 
-    var notes = listOf<Note>()
+    var notes = mutableListOf<Note>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_note, parent, false);
@@ -33,8 +34,13 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
         holder.content.text = note.desc
     }
 
+    fun removeItem(position: Int): Note {
+        val noteToDelete = notes.removeAt(position);
+        notifyItemRemoved(position);
+        return noteToDelete;
+    }
     fun changeData(list: List<Note>) {
-        this.notes = list;
+        this.notes = list.toMutableList();
         notifyDataSetChanged()
     }
 

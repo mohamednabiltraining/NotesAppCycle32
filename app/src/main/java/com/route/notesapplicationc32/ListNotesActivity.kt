@@ -1,8 +1,8 @@
 package com.route.notesapplicationc32
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import com.route.notesapplicationc32.adapter.NotesAdapter
 import com.route.notesapplicationc32.database.NotesDataBase
 import kotlinx.android.synthetic.main.activity_list_notes.*
@@ -18,8 +18,9 @@ class ListNotesActivity : AppCompatActivity() {
 
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                 .setAction("Action", null).show()*/
+            startActivity(Intent(this, AddNoteActivity::class.java))
         }
     }
 
